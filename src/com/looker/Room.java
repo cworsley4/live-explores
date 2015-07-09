@@ -22,6 +22,11 @@ public class Room {
         this.sessions.add(session);
     }
     
+    public Room addToRoom(Session session) {
+        this.sessions.add(session);
+        return this;
+    }
+    
     public static String getRoomId(Session session) {
         return session.getRequestParameterMap().get("userId").toString();
     }
