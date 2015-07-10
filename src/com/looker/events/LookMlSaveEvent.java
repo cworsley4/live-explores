@@ -5,7 +5,6 @@
  */
 package com.looker.events;
 
-import com.looker.RoomManager;
 import com.looker.dispatcher.AbstractEvent;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -43,11 +42,9 @@ public class LookMlSaveEvent extends AbstractEvent {
         System.out.print(super.roomSessions.length);
         System.out.print(" clients");
         System.out.print("\n");
+        
         for(Session s : super.roomSessions) {
             try {
-               s.getBasicRemote().sendText("Hiya from server");
-               s.getBasicRemote().sendText("Hiya from server");
-               s.getBasicRemote().sendText("Hiya from server");
                s.getBasicRemote().sendText("Hiya from server");
             } catch (IOException ex) {
                Logger.getLogger(LookMlSaveEvent.class.getName()).log(Level.SEVERE, null, ex);
