@@ -45,7 +45,10 @@ public class Request {
                 break;
         }
         
-        this.d.broadcast(msg.event, sessions, "");
+        System.out.println("Processing event: " + msg.event);
+        System.out.println("With data:" + msg.payload.toString());
+        
+        this.d.broadcast(msg.event, sessions, msg.payload);
     }
 
     @OnClose

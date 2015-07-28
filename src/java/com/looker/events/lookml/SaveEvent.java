@@ -27,23 +27,20 @@ public class SaveEvent extends AbstractEvent {
     }
     
     @Override
-    public String getEvent() {
-        return "save";
-    }
-
-    @Override
     public String getTopic() {
         return "lookml";
     }
     
+    @Override
+    public String getEvent() {
+        return "save";
+    }
+    
+    @Override
     public void execute(Session s) {
-        System.out.print("Emitting out to ");
-        System.out.print(super.roomSessions.length);
-        System.out.print(" clients");
-        System.out.print("\n");
-        
         try {
-            s.getBasicRemote().sendText("Hiya from server");
+            System.out.println(super.payloadData.toString());
+            super.emit(s, this.getFullyQualifiedEventTitle(), super.payloadData);
         } catch (IOException ex) {
             Logger.getLogger(SaveEvent.class.getName()).log(Level.SEVERE, null, ex);
         }   

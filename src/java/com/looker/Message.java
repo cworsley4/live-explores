@@ -16,7 +16,9 @@ public final class Message {
         JSONObject jsonObj = this.fromJson(raw);
         this.event = (String) jsonObj.get("event");
         this.scope = (String) jsonObj.get("scope");
-//        this.payload = jsonObj.get("data");
+        this.payload = jsonObj.get("data");
+        
+        System.out.println(this.payload.toString());
     }
     
     public Message(String event, String scope, Object payload) {
