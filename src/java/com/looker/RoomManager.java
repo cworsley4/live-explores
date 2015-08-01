@@ -76,8 +76,14 @@ public class RoomManager {
     }
     
     public Session[] getSessionsByRoomId(String roomId) {
-        Integer sessionSize =  this.roomMap.get(roomId).sessions.size();
+        Integer sessionSize = this.roomMap.get(roomId).sessions.size();
         return this.roomMap.get(roomId).sessions.toArray(new Session[sessionSize]); 
+    }
+    
+    public Session[] getJustMe(Session s) {
+        Session[] sessions = new Session[1];
+        sessions[0] = s;
+        return sessions;
     }
     
     public Map<String, Room> getRoomMap() {

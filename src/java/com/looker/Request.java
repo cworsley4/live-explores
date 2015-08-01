@@ -24,10 +24,14 @@ public class Request {
     
     @OnOpen
     public void onOpen(Session session) {
-        this.d.register("lookml:changed", SaveEvent.class);
-        this.d.register("lookml:goto", GoToEvent.class);
-        this.d.register("query:changed", QueryChangeEvent.class);
+        // System events
         this.d.register("system::ping", PingEvent.class);
+        
+        // Custom events
+        this.d.register("lookml:goto", GoToEvent.class);
+        this.d.register("lookml:changed", SaveEvent.class);
+        this.d.register("query:changed", QueryChangeEvent.class);
+        
         RoomManager.getInstance().setRoom(Room.getRoomId(session), session);
     }
 
@@ -44,13 +48,13 @@ public class Request {
             case "roommates":
                 sessions = RoomManager.getInstance().getAllOtherSessionsByRoomId(roomId, sessionId);
                 break;
+            case "mirror":
+                sessions = RoomManager.getInstance().getJustMe(session);
+                break;
             default:
                 sessions = RoomManager.getInstance().getSessionsByRoomId(roomId);
                 break;
         }
-        
-        System.out.println("Processing event: " + msg.event);
-        System.out.println("With data:" + msg.payload.toString());
         
         this.d.broadcast(msg.event, sessions, msg.payload);
     }
