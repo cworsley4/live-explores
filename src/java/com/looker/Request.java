@@ -1,5 +1,6 @@
 package com.looker;
 
+import system.events.PingEvent;
 import com.github.cworsley4.dispatcher.Dispatcher;
 import com.looker.events.explore.QueryChangeEvent;
 import com.looker.events.lookml.SaveEvent;
@@ -26,6 +27,7 @@ public class Request {
         this.d.register("lookml:changed", SaveEvent.class);
         this.d.register("lookml:goto", GoToEvent.class);
         this.d.register("query:changed", QueryChangeEvent.class);
+        this.d.register("system::ping", PingEvent.class);
         RoomManager.getInstance().setRoom(Room.getRoomId(session), session);
     }
 
