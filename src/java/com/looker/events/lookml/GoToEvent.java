@@ -9,15 +9,11 @@ package com.looker.events.lookml;
  *
  * @author cecil
  */
-public class SaveEvent extends LookMlEvent {
-    
-    public SaveEvent() {
-        
-    }
-    
+public class GoToEvent extends LookMlEvent {
+
     @Override
     public String getEvent() {
-        return "save";
+        return "goto";
     }
-        
+    
 }

@@ -3,6 +3,7 @@ package com.looker;
 import com.github.cworsley4.dispatcher.Dispatcher;
 import com.looker.events.explore.QueryChangeEvent;
 import com.looker.events.lookml.SaveEvent;
+import com.looker.events.lookml.GoToEvent;
 import java.io.IOException;
 
 import javax.websocket.OnOpen;
@@ -23,6 +24,7 @@ public class Request {
     @OnOpen
     public void onOpen(Session session) {
         this.d.register("lookml:changed", SaveEvent.class);
+        this.d.register("lookml:goto", GoToEvent.class);
         this.d.register("query:changed", QueryChangeEvent.class);
         RoomManager.getInstance().setRoom(Room.getRoomId(session), session);
     }
