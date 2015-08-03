@@ -21,7 +21,7 @@ public class QueryChangeEvent extends AbstractEvent {
 
     @Override
     public void execute(Session s) {
-        
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }
