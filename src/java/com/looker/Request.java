@@ -44,6 +44,9 @@ public class Request {
         
         Message msg = new Message(rawPayload);
         
+        System.out.println("Processing event: " + msg.event);
+        System.out.println("Payload: " + rawPayload);
+        
         switch(msg.scope) {
             case "roommates":
                 sessions = RoomManager.getInstance().getAllOtherSessionsByRoomId(roomId, sessionId);
@@ -56,7 +59,16 @@ public class Request {
                 break;
         }
         
-        this.d.broadcast(msg.event, sessions, msg.payload);
+        // Broadcast and acknowledge
+        try {
+            this.d.broadcast(msg.event, sessions, msg.payload);
+        } catch (Exception e) {
+            System.out.println("Could not broadcast event: " + msg.event);
+            System.out.println(e.fillInStackTrace());
+        }
+        
+        System.out.println("Acknowledging event via async");
+        session.getAsyncRemote().sendText(msg.toJsonForAck());
     }
 
     @OnClose
